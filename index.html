@@ -6,13 +6,15 @@
     <title>効果音検索システム</title>
     <script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="lib/jquery.parse.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css">
- 
+    <link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.min.css" />
+
 </head>
 
 <body>
     <form>
-        <input id="query" type="text" placeholder="クエリを入力">
+        <input id="query" type="search" placeholder="クエリを入力" size="20" maxlength="40" />
         <input id="search" type="button" value="検索">
     </form>
 
