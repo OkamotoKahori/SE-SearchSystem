@@ -1,3 +1,16 @@
-#result {
-	background-color: #FF69A3;
+.link {
+  fill: none;
+  stroke: #FF0077;
+  stroke-width: 1.5px;
+}
+
+.node circle {
+  fill: #FF82AB;
+  stroke: #FF82AB;
+  stroke-width: 1.5px;
+}
+
+text {
+  font: 10px sans-serif;
+  pointer-events: none;
 }
