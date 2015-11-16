@@ -20,12 +20,20 @@ function similar_sound(centerNode) {
 // }
 
 // オノマトペが類似した効果音を探す
-// function similar_onomatopoeia(){
-
-// }
+function similar_onomatopoeia(centerNode) {
+    var similarOnomatopoeia = [];
+    for (var b = 0; b < soundData.length - 1; b++) {
+        if (centerNode.form_1 === soundData[b].form_1 & centerNode.form_2 === soundData[b].form_2) {
+            if (centerNode.name !== soundData[b].name) {
+                similarOnomatopoeia.push(soundData[b]);
+            }
+        }
+    }
+    return similarOnomatopoeia;
+}
 
 // 何と何を繋げるのかのリストとノード情報を作成
-function create_linkList(centerNode, similarSoundData) {
+function create_linkList(centerNode, similarSoundData, similarOnomatopoeiaData) {
     var node = [],
         link = [];
 
@@ -39,12 +47,19 @@ function create_linkList(centerNode, similarSoundData) {
         });
     }
 
+    for (var m = 0; m < similarOnomatopoeiaData.length; m++) {
+        node.push(similarOnomatopoeiaData[m]);
+        link.push({
+            source: centerNode,
+            target: similarOnomatopoeiaData[m]
+        });
+    }
+
     // ノードとリンク情報のデータセットを作る
     var linkList = {
         nodes: node,
         links: link
     };
-
     return linkList;
 }
 
@@ -134,7 +149,9 @@ function sound_visualize(linkList) {
 
     function click(centerNode) {
         similarSoundData = similar_sound(centerNode);
-        linkList = create_linkList(centerNode, similarSoundData);
+        similarOnomatopoeiaData = similar_onomatopoeia(centerNode);
+        console.log(similarOnomatopoeiaData);
+        linkList = create_linkList(centerNode, similarSoundData, similarOnomatopoeiaData);
         visualize = update(linkList);
     }
 
@@ -253,13 +270,12 @@ $(function() {
             // 		if (query_onomatopoeia === soundData[k].context_1)
             // 	}
             // }
-            console.log(centerNode);
 
             similarSoundData = similar_sound(centerNode);
-            // similarContextData = similar_context(centerNode, soundData);
-            // similarOnomatopoeiaData = similar_onomatopoeia(centerNode, soundData);
+            // similarContextData = similar_context(centerNode);
+            similarOnomatopoeiaData = similar_onomatopoeia(centerNode);
 
-            linkList = create_linkList(centerNode, similarSoundData);
+            linkList = create_linkList(centerNode, similarSoundData, similarOnomatopoeiaData);
 
             visualize = sound_visualize(linkList);
 
