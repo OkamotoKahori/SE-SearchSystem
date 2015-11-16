@@ -3,11 +3,11 @@ var soundData = [];
 // 音響特徴が類似した効果音を探す
 function similar_sound(centerNode) {
     var similarSounds = [];
-    for (var j = 0; j < soundData.length - 1; j++) {
-        if (centerNode.group_number === soundData[j].group_number) {
+    for (var a = 0; a < soundData.length - 1; a++) {
+        if (centerNode.group_number === soundData[a].group_number) {
             // 中心のノードと同じ効果音以外を配列に格納
-            if (centerNode.name !== soundData[j].name) {
-                similarSounds.push(soundData[j]);
+            if (centerNode.name !== soundData[a].name) {
+                similarSounds.push(soundData[a]);
             }
         }
     }
@@ -31,11 +31,11 @@ function create_linkList(centerNode, similarSoundData) {
 
     node.push(centerNode); //中心のノードの情報を追加
 
-    for (var k = 0; k < similarSoundData.length; k++) {
-        node.push(similarSoundData[k]);
+    for (var l = 0; l < similarSoundData.length; l++) {
+        node.push(similarSoundData[l]);
         link.push({
             source: centerNode,
-            target: similarSoundData[k]
+            target: similarSoundData[l]
         });
     }
 
@@ -170,7 +170,7 @@ function sound_visualize(linkList) {
             .attr("r", 20);
 
         // node.remove("text");
-        
+
         node.append("text")
             .attr("x", -20)
             .attr("dy", ".35em")
@@ -209,23 +209,51 @@ $(function() {
         // 検索ボタンがクリックされたときの処理
         $('#search').on('click', function() {
             $('#result').empty();
-            var query = [];
-            query = $('#query').val(); //クエリの取得
+            var query_onomatopoeia = [],
+                query_context = [];
+
+            query_onomatopoeia = $('#query_onomatopoeia').val(); //クエリの取得
+            query_context = $('#query_context').val();
+
             // スペース区切りで配列に格納
 
 
-            // クエリに一致した効果音を探す
-            for (var i = 0; i < soundData.length - 1; i++) {
-                // オノマトペの一致
-                if (soundData[i].onomatopoeia === query) {
-                    centerNode = soundData[i];
-                    break; //ひとつ設定されたら処理を抜ける
+            // クエリに一致した効果音を探す：オノマトペ
+            // もし、テキストボックスに1文字以上入っていればの処理
+            if (query_onomatopoeia.length >= 1) {
+                for (var i = 0; i < soundData.length - 1; i++) {
+                    // オノマトペの一致
+                    if (query_onomatopoeia === soundData[i].onomatopoeia) {
+                        centerNode = soundData[i];
+                        break; //ひとつ設定されたら処理を抜ける
+                    }
+                    // else if (centerNode === undefined) {
+                    //     $('#result').text('一致する効果音がありませんでした');
+                    //     return;
+                    // }
                 }
-                // else if (centerNode === undefined) {
-                //     $('#result').text('一致する効果音がありませんでした');
-                //     return;
-                // }
             }
+
+            // クエリに一致した効果音を探す：文脈
+            // もし、テキストボックスに1文字以上入っていればの処理
+            else if (query_context.length >= 1) {
+                for (var j = 0; j < soundData.length - 1; j++) {
+                    if (query_context === soundData[j].context_1 || query_context === soundData[j].context_2) {
+                        centerNode = soundData[j];
+                        break;
+                    }
+                }
+            } else if (query_onomatopoeia.length == 0 & query_context.length == 0) {
+                console.log('入力なし');
+                return;
+            }
+
+            // else if (query_onomatopoeia.length >= 1 & query_context.length >=1){
+            // 	for (var k = 0; k < soundData.length - 1; k++){
+            // 		if (query_onomatopoeia === soundData[k].context_1)
+            // 	}
+            // }
+            console.log(centerNode);
 
             similarSoundData = similar_sound(centerNode);
             // similarContextData = similar_context(centerNode, soundData);
