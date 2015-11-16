@@ -13,7 +13,9 @@
         "group_number": "1",
         "onomatopoeia": "ぽーん",
         "context_1": "人工音",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aーん",
+        "form_2": "P"
     },
     {
         "name": "attack_02",
@@ -29,7 +31,9 @@
         "group_number": "2",
         "onomatopoeia": "ぎゅいーん",
         "context_1": "人工音",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "ABーん",
+        "form_2": "D"
     },
     {
         "name": "autoshaver_01",
@@ -45,7 +49,9 @@
         "group_number": "8",
         "onomatopoeia": "ぶーん",
         "context_1": "シェーバー",
-        "context_2": "髭剃り"
+        "context_2": "髭剃り",
+        "form_1": "Aーん",
+        "form_2": "D"
     },
     {
         "name": "bell_02",
@@ -61,7 +67,9 @@
         "group_number": "3",
         "onomatopoeia": "かーん",
         "context_1": "鐘",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aーん",
+        "form_2": ""
     },
     {
         "name": "bell_03",
@@ -77,7 +85,9 @@
         "group_number": "5",
         "onomatopoeia": "ちりんちりん",
         "context_1": "鈴",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "ABんABん",
+        "form_2": ""
     },
     {
         "name": "bell_04",
@@ -93,7 +103,9 @@
         "group_number": "5",
         "onomatopoeia": "ちりんちりん",
         "context_1": "鈴",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "ABんABん",
+        "form_2": ""
     },
     {
         "name": "boiling_01",
@@ -109,7 +121,9 @@
         "group_number": "2",
         "onomatopoeia": "ぐつぐつ",
         "context_1": "水",
-        "context_2": "沸騰"
+        "context_2": "沸騰",
+        "form_1": "ABAB",
+        "form_2": "D"
     },
     {
         "name": "boiling_02",
@@ -125,7 +139,9 @@
         "group_number": "2",
         "onomatopoeia": "ぐつぐつ",
         "context_1": "水",
-        "context_2": "沸騰"
+        "context_2": "沸騰",
+        "form_1": "ABAB",
+        "form_2": "D"
     },
     {
         "name": "broadcast_stopping_01",
@@ -141,7 +157,9 @@
         "group_number": "1",
         "onomatopoeia": "ぽー",
         "context_1": "人工音",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aー",
+        "form_2": "P"
     },
     {
         "name": "broom_01",
@@ -157,7 +175,9 @@
         "group_number": "5",
         "onomatopoeia": "さっさっ",
         "context_1": "ほうき",
-        "context_2": "はく"
+        "context_2": "はく",
+        "form_1": "AっAっ",
+        "form_2": ""
     },
     {
         "name": "brushing_01",
@@ -173,7 +193,9 @@
         "group_number": "5",
         "onomatopoeia": "しゃかしゃか",
         "context_1": "歯ブラシ",
-        "context_2": "歯磨き"
+        "context_2": "歯磨き",
+        "form_1": "ABAB",
+        "form_2": ""
     },
     {
         "name": "bubble_01",
@@ -189,7 +211,9 @@
         "group_number": "2",
         "onomatopoeia": "ぶくぶく",
         "context_1": "泡",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "ABAB",
+        "form_2": "D"
     },
     {
         "name": "button_01",
@@ -205,7 +229,9 @@
         "group_number": "1",
         "onomatopoeia": "ぴっ",
         "context_1": "ボタン",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aっ",
+        "form_2": "P"
     },
     {
         "name": "camera_01",
@@ -221,7 +247,9 @@
         "group_number": "5",
         "onomatopoeia": "かしゃっ",
         "context_1": "カメラ",
-        "context_2": "シャッター"
+        "context_2": "シャッター",
+        "form_1": "ABっ",
+        "form_2": ""
     },
     {
         "name": "clapping_01",
@@ -237,7 +265,9 @@
         "group_number": "9",
         "onomatopoeia": "ぱんぱん",
         "context_1": "拍手",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "AんAん",
+        "form_2": "P"
     },
     {
         "name": "click_01",
@@ -253,7 +283,9 @@
         "group_number": "8",
         "onomatopoeia": "かちっ",
         "context_1": "マウス",
-        "context_2": "クリック"
+        "context_2": "クリック",
+        "form_1": "ABっ",
+        "form_2": ""
     },
     {
         "name": "clinking_01",
@@ -269,7 +301,9 @@
         "group_number": "9",
         "onomatopoeia": "ちーん",
         "context_1": "グラス",
-        "context_2": "乾杯"
+        "context_2": "乾杯",
+        "form_1": "Aーん",
+        "form_2": ""
     },
     {
         "name": "clinking_02",
@@ -285,7 +319,9 @@
         "group_number": "9",
         "onomatopoeia": "ちりん",
         "context_1": "グラス",
-        "context_2": "乾杯"
+        "context_2": "乾杯",
+        "form_1": "ABん",
+        "form_2": ""
     },
     {
         "name": "clinking_03",
@@ -301,7 +337,9 @@
         "group_number": "9",
         "onomatopoeia": "ちーん",
         "context_1": "グラス",
-        "context_2": "乾杯"
+        "context_2": "乾杯",
+        "form_1": "Aーん",
+        "form_2": ""
     },
     {
         "name": "clock_01",
@@ -317,7 +355,9 @@
         "group_number": "6",
         "onomatopoeia": "ちくたくちくたく",
         "context_1": "時計",
-        "context_2": "秒針"
+        "context_2": "秒針",
+        "form_1": "other",
+        "form_2": "Repetitive"
     },
     {
         "name": "coin_01",
@@ -333,7 +373,9 @@
         "group_number": "4",
         "onomatopoeia": "ちゃりんちゃりん",
         "context_1": "コイン",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "ABんABん",
+        "form_2": ""
     },
     {
         "name": "cork_01",
@@ -349,7 +391,9 @@
         "group_number": "6",
         "onomatopoeia": "ぼん",
         "context_1": "ビン",
-        "context_2": "フタ"
+        "context_2": "フタ",
+        "form_1": "Aん",
+        "form_2": "D"
     },
     {
         "name": "crash_01",
@@ -365,7 +409,9 @@
         "group_number": "9",
         "onomatopoeia": "がしゃん",
         "context_1": "レジ",
-        "context_2": "ドロア"
+        "context_2": "ドロア",
+        "form_1": "ABん",
+        "form_2": "D"
     },
     {
         "name": "cutter_01",
@@ -381,7 +427,9 @@
         "group_number": "4",
         "onomatopoeia": "きりりりりっ",
         "context_1": "カッター",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "other",
+        "form_2": ""
     },
     {
         "name": "cutting_01",
@@ -397,7 +445,9 @@
         "group_number": "6",
         "onomatopoeia": "とん",
         "context_1": "まな板",
-        "context_2": "切る"
+        "context_2": "切る",
+        "form_1": "Aん",
+        "form_2": ""
     },
     {
         "name": "door_chime_01",
@@ -413,7 +463,9 @@
         "group_number": "1",
         "onomatopoeia": "ぴんぽーんぴんぽーん",
         "context_1": "インターホン",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "other",
+        "form_2": "P"
     },
     {
         "name": "door_chime_02",
@@ -429,7 +481,9 @@
         "group_number": "9",
         "onomatopoeia": "ぴんぽーん",
         "context_1": "インターホン",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "other",
+        "form_2": "P"
     },
     {
         "name": "door_key_01",
@@ -445,7 +499,9 @@
         "group_number": "6",
         "onomatopoeia": "かちゃ",
         "context_1": "鍵",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "AB",
+        "form_2": ""
     },
     {
         "name": "door_knock_01",
@@ -461,7 +517,9 @@
         "group_number": "2",
         "onomatopoeia": "どんどんどん",
         "context_1": "ドア",
-        "context_2": "ノック"
+        "context_2": "ノック",
+        "form_1": "AんAん",
+        "form_2": "D"
     },
     {
         "name": "door_knock_02",
@@ -477,7 +535,9 @@
         "group_number": "2",
         "onomatopoeia": "どんどん",
         "context_1": "ドア",
-        "context_2": "ノック"
+        "context_2": "ノック",
+        "form_1": "AんAん",
+        "form_2": "D"
     },
     {
         "name": "door_knock_06",
@@ -493,7 +553,9 @@
         "group_number": "3",
         "onomatopoeia": "とんとんとん",
         "context_1": "ドア",
-        "context_2": "ノック"
+        "context_2": "ノック",
+        "form_1": "AんAん",
+        "form_2": ""
     },
     {
         "name": "drinking_01",
@@ -509,7 +571,9 @@
         "group_number": "3",
         "onomatopoeia": "ごくごく",
         "context_1": "嚥下音",
-        "context_2": "飲み物"
+        "context_2": "飲み物",
+        "form_1": "ABAB",
+        "form_2": "D"
     },
     {
         "name": "eating_01",
@@ -525,7 +589,9 @@
         "group_number": "9",
         "onomatopoeia": "ずずー",
         "context_1": "麺",
-        "context_2": "すする"
+        "context_2": "すする",
+        "form_1": "other",
+        "form_2": "D"
     },
     {
         "name": "eating_02",
@@ -541,7 +607,9 @@
         "group_number": "8",
         "onomatopoeia": "じゅるるる",
         "context_1": "スープ",
-        "context_2": "すする"
+        "context_2": "すする",
+        "form_1": "other",
+        "form_2": "D"
     },
     {
         "name": "eating_03",
@@ -557,7 +625,9 @@
         "group_number": "9",
         "onomatopoeia": "ぼりぼり",
         "context_1": "お菓子",
-        "context_2": "食べ物"
+        "context_2": "食べ物",
+        "form_1": "ABAB",
+        "form_2": "D"
     },
     {
         "name": "electric_01",
@@ -573,7 +643,9 @@
         "group_number": "5",
         "onomatopoeia": "じじじじ",
         "context_1": "電気",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "other",
+        "form_2": "D"
     },
     {
         "name": "explosion_03",
@@ -589,7 +661,9 @@
         "group_number": "2",
         "onomatopoeia": "ぼーん",
         "context_1": "爆発音",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aーん",
+        "form_2": "D"
     },
     {
         "name": "fabric_01",
@@ -605,7 +679,9 @@
         "group_number": "3",
         "onomatopoeia": "ぱんぱん",
         "context_1": "布",
-        "context_2": "叩く"
+        "context_2": "叩く",
+        "form_1": "ABAB",
+        "form_2": "P"
     },
     {
         "name": "falling_01",
@@ -621,7 +697,9 @@
         "group_number": "6",
         "onomatopoeia": "からん",
         "context_1": "落下",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "ABん",
+        "form_2": ""
     },
     {
         "name": "fire_01",
@@ -637,7 +715,9 @@
         "group_number": "3",
         "onomatopoeia": "ごー",
         "context_1": "炎",
-        "context_2": "燃える"
+        "context_2": "燃える",
+        "form_1": "Aー",
+        "form_2": "D"
     },
     {
         "name": "ice_water_01",
@@ -653,7 +733,9 @@
         "group_number": "9",
         "onomatopoeia": "からから",
         "context_1": "氷",
-        "context_2": "混ぜる"
+        "context_2": "混ぜる",
+        "form_1": "ABAB",
+        "form_2": ""
     },
     {
         "name": "key_01",
@@ -669,7 +751,9 @@
         "group_number": "4",
         "onomatopoeia": "ちりんちりん",
         "context_1": "鍵",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "ABんABん",
+        "form_2": ""
     },
     {
         "name": "keyboard_01",
@@ -685,7 +769,9 @@
         "group_number": "9",
         "onomatopoeia": "ちきっ",
         "context_1": "キーボード",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "ABっ",
+        "form_2": ""
     },
     {
         "name": "keyboard_02",
@@ -701,7 +787,9 @@
         "group_number": "8",
         "onomatopoeia": "かちゃかちゃ",
         "context_1": "キーボード",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "ABAB",
+        "form_2": ""
     },
     {
         "name": "kick_01",
@@ -717,7 +805,9 @@
         "group_number": "2",
         "onomatopoeia": "どん",
         "context_1": "キック",
-        "context_2": "蹴る"
+        "context_2": "蹴る",
+        "form_1": "Aん",
+        "form_2": "D"
     },
     {
         "name": "lighter_01",
@@ -733,7 +823,9 @@
         "group_number": "7",
         "onomatopoeia": "ちっ",
         "context_1": "ライター",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aっ",
+        "form_2": ""
     },
     {
         "name": "magic_tape_01",
@@ -749,7 +841,9 @@
         "group_number": "9",
         "onomatopoeia": "びりっ",
         "context_1": "マジックテープ",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "ABっ",
+        "form_2": "D"
     },
     {
         "name": "match_04",
@@ -765,7 +859,9 @@
         "group_number": "9",
         "onomatopoeia": "じゅー",
         "context_1": "マッチ",
-        "context_2": "火"
+        "context_2": "火",
+        "form_1": "Aー",
+        "form_2": "D"
     },
     {
         "name": "money_box_01",
@@ -781,7 +877,9 @@
         "group_number": "9",
         "onomatopoeia": "ちゃりん",
         "context_1": "貯金箱",
-        "context_2": "お金"
+        "context_2": "お金",
+        "form_1": "ABん",
+        "form_2": ""
     },
     {
         "name": "motor_01",
@@ -797,7 +895,9 @@
         "group_number": "5",
         "onomatopoeia": "うぃーん",
         "context_1": "モーター",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aーん",
+        "form_2": ""
     },
     {
         "name": "noise_01",
@@ -813,7 +913,9 @@
         "group_number": "8",
         "onomatopoeia": "ぶー",
         "context_1": "ノイズ",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aー",
+        "form_2": "D"
     },
     {
         "name": "opening_01",
@@ -829,7 +931,9 @@
         "group_number": "8",
         "onomatopoeia": "がっちゃん",
         "context_1": "レンジ",
-        "context_2": "開閉"
+        "context_2": "開閉",
+        "form_1": "AっBん",
+        "form_2": "D"
     },
     {
         "name": "opening_02",
@@ -845,7 +949,9 @@
         "group_number": "7",
         "onomatopoeia": "がちゃん",
         "context_1": "冷蔵庫",
-        "context_2": "開閉"
+        "context_2": "開閉",
+        "form_1": "ABん",
+        "form_2": "D"
     },
     {
         "name": "opening_04",
@@ -861,7 +967,9 @@
         "group_number": "9",
         "onomatopoeia": "ぎいーん",
         "context_1": "オーブン",
-        "context_2": "開閉"
+        "context_2": "開閉",
+        "form_1": "ABーん",
+        "form_2": "D"
     },
     {
         "name": "opening_05",
@@ -877,7 +985,9 @@
         "group_number": "6",
         "onomatopoeia": "とん",
         "context_1": "炊飯器",
-        "context_2": "フタ"
+        "context_2": "フタ",
+        "form_1": "Aん",
+        "form_2": ""
     },
     {
         "name": "opening_06",
@@ -893,7 +1003,9 @@
         "group_number": "9",
         "onomatopoeia": "しゃっしゃっ",
         "context_1": "ビン",
-        "context_2": "フタ"
+        "context_2": "フタ",
+        "form_1": "AっAっ",
+        "form_2": ""
     },
     {
         "name": "opening_08",
@@ -909,7 +1021,9 @@
         "group_number": "9",
         "onomatopoeia": "すーこん",
         "context_1": "引き出し",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "AーBん",
+        "form_2": ""
     },
     {
         "name": "paper_01",
@@ -925,7 +1039,9 @@
         "group_number": "5",
         "onomatopoeia": "しゃー",
         "context_1": "紙",
-        "context_2": "破る"
+        "context_2": "破る",
+        "form_1": "Aー",
+        "form_2": ""
     },
     {
         "name": "paper_03",
@@ -941,7 +1057,9 @@
         "group_number": "5",
         "onomatopoeia": "ぐしゃぐしゃ",
         "context_1": "紙",
-        "context_2": "丸める"
+        "context_2": "丸める",
+        "form_1": "ABAB",
+        "form_2": "D"
     },
     {
         "name": "paper_07",
@@ -957,7 +1075,9 @@
         "group_number": "8",
         "onomatopoeia": "ぺらっ",
         "context_1": "紙",
-        "context_2": "めくる"
+        "context_2": "めくる",
+        "form_1": "ABっ",
+        "form_2": "P"
     },
     {
         "name": "phoning_01",
@@ -973,7 +1093,9 @@
         "group_number": "2",
         "onomatopoeia": "ぴぽぱぽ",
         "context_1": "操作音",
-        "context_2": "電話"
+        "context_2": "電話",
+        "form_1": "other",
+        "form_2": "P"
     },
     {
         "name": "phoning_03",
@@ -989,7 +1111,9 @@
         "group_number": "1",
         "onomatopoeia": "つーつー",
         "context_1": "不通音",
-        "context_2": "電話"
+        "context_2": "電話",
+        "form_1": "AーAー",
+        "form_2": ""
     },
     {
         "name": "phoning_04",
@@ -1005,7 +1129,9 @@
         "group_number": "6",
         "onomatopoeia": "ぷるるる",
         "context_1": "呼び出し音",
-        "context_2": "電話"
+        "context_2": "電話",
+        "form_1": "other",
+        "form_2": "P"
     },
     {
         "name": "polishing_01",
@@ -1021,7 +1147,9 @@
         "group_number": "3",
         "onomatopoeia": "きゅっきゅっ",
         "context_1": "ガラス",
-        "context_2": "磨く"
+        "context_2": "磨く",
+        "form_1": "AっAっ",
+        "form_2": ""
     },
     {
         "name": "pot_01",
@@ -1037,7 +1165,9 @@
         "group_number": "7",
         "onomatopoeia": "かちゃん",
         "context_1": "ポット",
-        "context_2": "開ける"
+        "context_2": "開ける",
+        "form_1": "ABん",
+        "form_2": ""
     },
     {
         "name": "pouring_01",
@@ -1053,7 +1183,9 @@
         "group_number": "8",
         "onomatopoeia": "じょろじょろ",
         "context_1": "飲み物",
-        "context_2": "注ぐ"
+        "context_2": "注ぐ",
+        "form_1": "ABAB",
+        "form_2": "D"
     },
     {
         "name": "power_point_01",
@@ -1069,7 +1201,9 @@
         "group_number": "6",
         "onomatopoeia": "ごとんととん",
         "context_1": "コンセント",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "other",
+        "form_2": "D"
     },
     {
         "name": "pulling_01",
@@ -1085,7 +1219,9 @@
         "group_number": "3",
         "onomatopoeia": "ぶーん",
         "context_1": "椅子",
-        "context_2": "ひく"
+        "context_2": "ひく",
+        "form_1": "Aーん",
+        "form_2": "D"
     },
     {
         "name": "punch_01",
@@ -1101,7 +1237,9 @@
         "group_number": "7",
         "onomatopoeia": "ぱん",
         "context_1": "パンチ",
-        "context_2": "殴る"
+        "context_2": "殴る",
+        "form_1": "ABん",
+        "form_2": "P"
     },
     {
         "name": "putting_03",
@@ -1117,7 +1255,9 @@
         "group_number": "7",
         "onomatopoeia": "ごとっ",
         "context_1": "カバン",
-        "context_2": "置く"
+        "context_2": "置く",
+        "form_1": "ABっ",
+        "form_2": "D"
     },
     {
         "name": "putting_04",
@@ -1133,7 +1273,9 @@
         "group_number": "7",
         "onomatopoeia": "どん",
         "context_1": "カバン",
-        "context_2": "置く"
+        "context_2": "置く",
+        "form_1": "Aん",
+        "form_2": "D"
     },
     {
         "name": "putting_06",
@@ -1149,7 +1291,9 @@
         "group_number": "7",
         "onomatopoeia": "かたっ",
         "context_1": "鉛筆",
-        "context_2": "置く"
+        "context_2": "置く",
+        "form_1": "ABっ",
+        "form_2": ""
     },
     {
         "name": "putting_09",
@@ -1165,7 +1309,9 @@
         "group_number": "4",
         "onomatopoeia": "かちゃ",
         "context_1": "金属",
-        "context_2": "置く"
+        "context_2": "置く",
+        "form_1": "AB",
+        "form_2": ""
     },
     {
         "name": "putting_11",
@@ -1181,7 +1327,9 @@
         "group_number": "6",
         "onomatopoeia": "こっ",
         "context_1": "コップ",
-        "context_2": "置く"
+        "context_2": "置く",
+        "form_1": "Aっ",
+        "form_2": ""
     },
     {
         "name": "putting_15",
@@ -1197,7 +1345,9 @@
         "group_number": "9",
         "onomatopoeia": "かちゃ",
         "context_1": "フライパン",
-        "context_2": "置く"
+        "context_2": "置く",
+        "form_1": "AB",
+        "form_2": ""
     },
     {
         "name": "rain_01",
@@ -1213,7 +1363,9 @@
         "group_number": "5",
         "onomatopoeia": "ざー",
         "context_1": "雨",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aー",
+        "form_2": "D"
     },
     {
         "name": "reciever_01",
@@ -1229,7 +1381,9 @@
         "group_number": "9",
         "onomatopoeia": "がちゃ",
         "context_1": "受話器",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "AB",
+        "form_2": "D"
     },
     {
         "name": "roll_02",
@@ -1245,7 +1399,9 @@
         "group_number": "6",
         "onomatopoeia": "ころころ",
         "context_1": "鉛筆",
-        "context_2": "転がる"
+        "context_2": "転がる",
+        "form_1": "ABAB",
+        "form_2": ""
     },
     {
         "name": "roll_04",
@@ -1261,7 +1417,9 @@
         "group_number": "9",
         "onomatopoeia": "かんかららん",
         "context_1": "缶",
-        "context_2": "転がる"
+        "context_2": "転がる",
+        "form_1": "other",
+        "form_2": ""
     },
     {
         "name": "scissors_01",
@@ -1277,7 +1435,9 @@
         "group_number": "9",
         "onomatopoeia": "しゃきん",
         "context_1": "ハサミ",
-        "context_2": "切る"
+        "context_2": "切る",
+        "form_1": "ABん",
+        "form_2": ""
     },
     {
         "name": "sello_tape_01",
@@ -1293,7 +1453,9 @@
         "group_number": "8",
         "onomatopoeia": "っぎりりりりぃっかちゃん",
         "context_1": "セロテープ",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "other",
+        "form_2": "D"
     },
     {
         "name": "shaking_01",
@@ -1309,7 +1471,9 @@
         "group_number": "9",
         "onomatopoeia": "かしゃかしゃ",
         "context_1": "薬",
-        "context_2": "振る"
+        "context_2": "振る",
+        "form_1": "ABAB",
+        "form_2": ""
     },
     {
         "name": "spray_01",
@@ -1325,7 +1489,9 @@
         "group_number": "5",
         "onomatopoeia": "しゃっ",
         "context_1": "スプレー",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aっ",
+        "form_2": ""
     },
     {
         "name": "spray_02",
@@ -1341,7 +1507,9 @@
         "group_number": "5",
         "onomatopoeia": "さっさっ",
         "context_1": "スプレー",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "AっAっ",
+        "form_2": ""
     },
     {
         "name": "staple_01",
@@ -1357,7 +1525,9 @@
         "group_number": "9",
         "onomatopoeia": "たんたん",
         "context_1": "ホッチキス",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "AんAん",
+        "form_2": ""
     },
     {
         "name": "striking_01",
@@ -1373,7 +1543,9 @@
         "group_number": "3",
         "onomatopoeia": "どんどん",
         "context_1": "釘",
-        "context_2": "打つ"
+        "context_2": "打つ",
+        "form_1": "AんAん",
+        "form_2": "D"
     },
     {
         "name": "swish_01",
@@ -1389,7 +1561,9 @@
         "group_number": "5",
         "onomatopoeia": "さっさっ",
         "context_1": "布",
-        "context_2": "衣擦れ"
+        "context_2": "衣擦れ",
+        "form_1": "AっAっ",
+        "form_2": ""
     },
     {
         "name": "switch_02",
@@ -1405,7 +1579,9 @@
         "group_number": "7",
         "onomatopoeia": "ちっ",
         "context_1": "スイッチ",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aっ",
+        "form_2": ""
     },
     {
         "name": "tea_with_a_spoon_01",
@@ -1421,7 +1597,9 @@
         "group_number": "8",
         "onomatopoeia": "からんからん",
         "context_1": "スプーン",
-        "context_2": "混ぜる"
+        "context_2": "混ぜる",
+        "form_1": "ABんABん",
+        "form_2": ""
     },
     {
         "name": "tissue_01",
@@ -1437,7 +1615,9 @@
         "group_number": "9",
         "onomatopoeia": "ざっ",
         "context_1": "ティッシュ",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aっ",
+        "form_2": "D"
     },
     {
         "name": "toaster_01",
@@ -1453,7 +1633,9 @@
         "group_number": "7",
         "onomatopoeia": "ばん",
         "context_1": "トースター",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aん",
+        "form_2": "D"
     },
     {
         "name": "underwater_01",
@@ -1469,7 +1651,9 @@
         "group_number": "3",
         "onomatopoeia": "ぼこぼこ",
         "context_1": "水",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "ABAB",
+        "form_2": "D"
     },
     {
         "name": "vibration_01",
@@ -1485,7 +1669,9 @@
         "group_number": "2",
         "onomatopoeia": "ぶーぶー",
         "context_1": "バイブレーション",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "AーAー",
+        "form_2": "D"
     },
     {
         "name": "water_01",
@@ -1501,7 +1687,9 @@
         "group_number": "5",
         "onomatopoeia": "じゃー",
         "context_1": "水",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aー",
+        "form_2": "D"
     },
     {
         "name": "water_07",
@@ -1517,7 +1705,9 @@
         "group_number": "5",
         "onomatopoeia": "じゃー",
         "context_1": "水",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "Aー",
+        "form_2": "D"
     },
     {
         "name": "water_11",
@@ -1533,7 +1723,9 @@
         "group_number": "8",
         "onomatopoeia": "びちゃびちゃ",
         "context_1": "水",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "ABAB",
+        "form_2": "D"
     },
     {
         "name": "wave_01",
@@ -1549,7 +1741,9 @@
         "group_number": "2",
         "onomatopoeia": "ざー",
         "context_1": "海",
-        "context_2": "波"
+        "context_2": "波",
+        "form_1": "Aー",
+        "form_2": "D"
     },
     {
         "name": "zenmai_01",
@@ -1565,7 +1759,9 @@
         "group_number": "8",
         "onomatopoeia": "かちかち",
         "context_1": "ゼンマイ",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "ABAB",
+        "form_2": ""
     },
     {
         "name": "zipper_01",
@@ -1581,7 +1777,9 @@
         "group_number": "8",
         "onomatopoeia": "じーじー",
         "context_1": "ジッパー",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "AーAー",
+        "form_2": "D"
     },
     {
         "name": "zipper_02",
@@ -1597,6 +1795,8 @@
         "group_number": "8",
         "onomatopoeia": "ぶーぶー",
         "context_1": "ジッパー",
-        "context_2": ""
+        "context_2": "",
+        "form_1": "AーAー",
+        "form_2": "D"
     }
 ]
