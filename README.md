@@ -1,5 +1,5 @@
 # SE-SearchSystem
 This system is a prototype.
 
-##実装目標
-*今あるデータを使ってプロトタイプシステムを６月中に実装する
+* 6月段階のシステムを改良中
+* 目指せ11月末完成！
