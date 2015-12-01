@@ -116,8 +116,11 @@ function visualize_output(linkList) {
     var force = d3.layout.force()
         .nodes(linkList.nodes)
         .links(linkList.links)
-        .charge(-500)
-        .linkDistance(200)
+        .charge(-1000)
+        .linkDistance(function(d) {
+            return Math.floor(Math.random() * 2 + 1) * 150;
+        })
+        .friction(0.3)
         .size([width, height])
         .on("tick", tick)
         .start();
@@ -158,8 +161,9 @@ function visualize_output(linkList) {
             }
         })
         .style("opacity", function(d) {
-            if (d.type !== "center")
+            if (d.type !== "center") {
                 return 0.5
+            }
         });
 
     node.append("text")
@@ -169,7 +173,8 @@ function visualize_output(linkList) {
             var text = (d.onomatopoeia + " " + d.context_1 + " " + d.context_2);
             return text;
         })
-        .attr("font-size", 10 + "px")
+        .attr("font-size", 12 + "px")
+        .attr("font-family", "sans-serif")
         .attr("pointer-events", "none");
 
     function tick() {
@@ -225,7 +230,6 @@ function visualize_output(linkList) {
         // 可視化部分の更新
         visualize_output(linkList);
     }
-
 };
 
 
@@ -245,11 +249,19 @@ $(function() {
     $.getJSON('data.json', function(data) {
         for (var i = 0; i < data.length - 1; i++) {
             soundData.push(data[i]);
-            // 重複するサジェスト語群をカットしたい
+            // サジェスト用配列の作成
             onomatopoeia_suggest.push(data[i].onomatopoeia);
             context_suggest.push(data[i].context_1);
             context_suggest.push(data[i].context_2);
         }
+
+        // サジェスト用配列内の重複を削除
+        onomatopoeia_suggest = onomatopoeia_suggest.filter(function(x, i, self) {
+            return self.indexOf(x) === i;
+        });
+        context_suggest = context_suggest.filter(function(x, i, self) {
+            return self.indexOf(x) === i;
+        });
 
         // クエリサジェスト機能
         $('#query_onomatopoeia').autocomplete({
@@ -273,7 +285,6 @@ $(function() {
 
         // 検索ボタンがクリックされたときの処理
         $('#search').on('click', function() {
-            $('#result').remove();
             var query_onomatopoeia = [],
                 query_context = [];
 
