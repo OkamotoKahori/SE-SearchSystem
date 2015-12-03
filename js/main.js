@@ -16,43 +16,48 @@ function similar_sound(centerNode) {
 }
 
 // 文脈が類似した効果音を探す
-// function similar_context(centerNode) {
-//     var similarContext = [];
-//     var context_1 = centerNode.context_1;
-//     var context_2 = centerNode.context_2;
+function similar_context(centerNode) {
+    var similarContext = [];
+    for (var b = 0; b < soundData.length - 1; b++) {
+        if (centerNode.category === soundData[b].category) {
+            // 中心のノードと同じ効果音以外を配列に格納
+            if (centerNode.name !== soundData[b].name) {
+                soundData[b].type = "context";
+                similarContext.push(soundData[b]);
+            }
+        }
+    }
+    return similarContext;
+}
 
-//     $.ajax({
-//         url: 'cgi-bin/word2vec.cgi',
-//         type: 'GET',
-//         async: true,
-//         // dataType: "json",
-//         data: {
-//             'context_1': context_1,
-//             'context_2': context_2
-//         }
+// var context_2 = centerNode.context_2;
 
-//     }).success(function(contexts) {
-//         console.log(contexts);
-//         // contexts.data1
+// $.ajax({
+//     url: 'relatedword.php',
+//     type: 'POST',
+//     async: true,
+//     // dataType: 'json',
+//     data: {
+//         'context_1': context_1,
+//         'context_2': context_2
+//     }
 
-//     }).error(function() {
-//         console.log('error');
-//     });
-
-//     return similarContext;
-
-// }
+// }).success(function(data) {
+//     console.log(data);
+//     // contexts.data1
+// }).error(function() {
+//     console.log('error');
+// });
 
 
 // オノマトペが類似した効果音を探す
 function similar_onomatopoeia(centerNode) {
     var similarOnomatopoeia = [];
-    for (var b = 0; b < soundData.length - 1; b++) {
-        if (centerNode.form_1 === soundData[b].form_1 & centerNode.form_2 === soundData[b].form_2) {
-            if (centerNode.name !== soundData[b].name) {
-                soundData[b].type = "onomatopoeia";
-
-                similarOnomatopoeia.push(soundData[b]);
+    for (var c = 0; c < soundData.length - 1; c++) {
+        if (centerNode.form_1 === soundData[c].form_1 & centerNode.form_2 === soundData[c].form_2) {
+            if (centerNode.name !== soundData[c].name) {
+                soundData[c].type = "onomatopoeia";
+                similarOnomatopoeia.push(soundData[c]);
             }
         }
     }
@@ -60,7 +65,7 @@ function similar_onomatopoeia(centerNode) {
 }
 
 // 何と何を繋げるのかのリストとノード情報を作成
-function create_linkList(centerNode, similarSoundData, similarOnomatopoeiaData) {
+function create_linkList(centerNode, similarSoundData, similarContextData, similarOnomatopoeiaData) {
     var node = [],
         link = [];
 
@@ -76,13 +81,13 @@ function create_linkList(centerNode, similarSoundData, similarOnomatopoeiaData) 
     }
 
     // 文脈が類似した効果音のリストを追加
-    // for (var m = 0; m < similarContextData.length; m++) {
-    //     node.push(similarSoundData[m]);
-    //     link.push({
-    //         source: centerNode,
-    //         target: similarSoundData[m]
-    //     });
-    // }
+    for (var m = 0; m < similarContextData.length; m++) {
+        node.push(similarContextData[m]);
+        link.push({
+            source: centerNode,
+            target: similarContextData[m]
+        });
+    }
 
     // オノマトペが類似した効果音のリストを追加
     for (var n = 0; n < similarOnomatopoeiaData.length; n++) {
@@ -104,13 +109,18 @@ function create_linkList(centerNode, similarSoundData, similarOnomatopoeiaData) 
 
 // 可視化部分
 function visualize_output(linkList) {
-
     // svg領域の準備
-    var width = window.innerWidth,
-        height = window.innerHeight,
-        svg = d3.select("body").append("svg")
+    var width = $("#result").innerWidth(),
+        height = $("#result").innerHeight(),
+        svg = d3.select("#result").append("svg")
         .attr("width", width)
         .attr("height", height);
+
+    // var fav_width = $("#favList").innerWidth(),
+    //     fav_height = $("#favList").innerHeight(),
+    //     fav_svg = d3.select("#favList").append("svg")
+    //     .attr("width", fav_width)
+    //     .attr("height", fav_height);
 
     // forceレイアウトの適用部分
     var force = d3.layout.force()
@@ -121,6 +131,7 @@ function visualize_output(linkList) {
             return Math.floor(Math.random() * 2 + 1) * 150;
         })
         .friction(0.3)
+        .gravity(0.05)
         .size([width, height])
         .on("tick", tick)
         .start();
@@ -145,6 +156,7 @@ function visualize_output(linkList) {
         .on("mouseover", mouseover)
         .on("mouseout", mouseout)
         .on("click", click)
+        // .on("contextmenu", contextmenu)
         .call(force.drag)
 
     node.append("circle")
@@ -155,7 +167,7 @@ function visualize_output(linkList) {
             } else if (d.type === "sound") {
                 return "#FFA500";
             } else if (d.type === "context") {
-                return "yerrow";
+                return "#00FA9A";
             } else {
                 return "#7B68EE";
             }
@@ -213,23 +225,53 @@ function visualize_output(linkList) {
         // 可視化部分の初期化
         svg.remove();
         $('#sound').empty();
-        // JSONのtypeを削除
-        delete centerNode.type;
+        delete centerNode.type; // JSONのtypeを削除
 
         // centerNodeにtype:centerを追加
         centerNode.type = "center";
 
         // centerNodeに類似した効果音情報の取得
         similarSoundData = similar_sound(centerNode);
-        // similarContextData = similar_context(centerNode);
+        similarContextData = similar_context(centerNode);
         similarOnomatopoeiaData = similar_onomatopoeia(centerNode);
 
         // リストの更新
-        linkList = create_linkList(centerNode, similarSoundData, similarOnomatopoeiaData);
+        linkList = create_linkList(centerNode, similarSoundData, similarContextData, similarOnomatopoeiaData);
 
         // 可視化部分の更新
         visualize_output(linkList);
     }
+
+    // function contextmenu(d) {
+    //     // favListのサークル描画
+    //     var fav_node = fav_svg.selectAll("fav_node")
+    //         .data(d)
+    //         .enter().append("circle")
+    //         .attr("class", "fav_node")
+    //         .on("mouseover", mouseover)
+    //         .on("mouseout", mouseout)
+
+    //     fav_node.append("circle")
+    //         .attr("r", 25)
+    //         .attr("fill", function() {
+    //             return "#FF82AB";
+    //         })
+    //         .style("opacity", function() {
+    //             return 0.5;
+    //         })
+
+    //     fav_node.append("text")
+    //         .attr("x", -20)
+    //         .attr("dy", ".35em")
+    //         .text(function(d) {
+    //             var text = (d.onomatopoeia + " " + d.context_1 + " " + d.context_2);
+    //             return text;
+    //         })
+    //         .attr("font-size", 12 + "px")
+    //         .attr("font-family", "sans-serif")
+    //         .attr("pointer-events", "none");
+
+    // }
 };
 
 
@@ -246,7 +288,8 @@ $(function() {
     var linkList = {};
 
     // JSONデータの格納
-    $.getJSON('data.json', function(data) {
+    $.getJSON('data_test.json', function(data) {
+        // $.getJSON('data.json', function(data) {
         for (var i = 0; i < data.length - 1; i++) {
             soundData.push(data[i]);
             // サジェスト用配列の作成
@@ -288,7 +331,8 @@ $(function() {
             var query_onomatopoeia = [],
                 query_context = [];
 
-            query_onomatopoeia = $('#query_onomatopoeia').val(); //クエリの取得
+            //クエリの取得
+            query_onomatopoeia = $('#query_onomatopoeia').val();
             query_context = $('#query_context').val();
 
             // スペース区切りで配列に格納
@@ -321,10 +365,11 @@ $(function() {
                         break;
                     }
                 }
-            } else if (query_onomatopoeia.length == 0 & query_context.length == 0) {
-                console.log('入力なし');
-                return;
             }
+            // else if (query_onomatopoeia.length == 0 & query_context.length == 0) {
+            //     console.log('入力なし');
+            //     return;
+            // }
 
             // else if (query_onomatopoeia.length >= 1 & query_context.length >=1){
             //  for (var k = 0; k < soundData.length - 1; k++){
@@ -333,11 +378,11 @@ $(function() {
             // }
 
             similarSoundData = similar_sound(centerNode);
-            // similarContextData = similar_context(centerNode);
+            similarContextData = similar_context(centerNode);
             similarOnomatopoeiaData = similar_onomatopoeia(centerNode);
 
             // 文脈の類似を作ったらここにsimilarContextData追加する
-            linkList = create_linkList(centerNode, similarSoundData, similarOnomatopoeiaData);
+            linkList = create_linkList(centerNode, similarSoundData, similarContextData, similarOnomatopoeiaData);
 
             visualize_output(linkList);
 

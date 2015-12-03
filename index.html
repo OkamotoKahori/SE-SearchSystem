@@ -13,13 +13,16 @@
 </head>
 
 <body>
-    <form>
+    <form action="" method="POST">
         <input id="query_onomatopoeia" type="search" placeholder="オノマトペ" size="20" maxlength="40" />
         <input id="query_context" type="search" placeholder="音の発生源" size="20" maxlength="40" />
         <input id="search" type="button" value="検索">
     </form>
     <div id="sound"></div>
-    <div id="result"></div>
+    <div id="space">
+        <div class="result" id="result"></div>
+        <div class="favList" id="favList"></div>
+    </div>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
 
