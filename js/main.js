@@ -3,7 +3,7 @@ var soundData = [];
 // 音響特徴が類似した効果音を探す
 function similar_sound(centerNode) {
     var similarSounds = [];
-    for (var a = 0; a < soundData.length - 1; a++) {
+    for (var a = 0; a < soundData.length; a++) {
         if (centerNode.group_number === soundData[a].group_number) {
             // 中心のノードと同じ効果音以外を配列に格納
             if (centerNode.name !== soundData[a].name) {
@@ -18,7 +18,7 @@ function similar_sound(centerNode) {
 // 文脈が類似した効果音を探す
 function similar_context(centerNode) {
     var similarContext = [];
-    for (var b = 0; b < soundData.length - 1; b++) {
+    for (var b = 0; b < soundData.length; b++) {
         if (centerNode.category === soundData[b].category) {
             // 中心のノードと同じ効果音以外を配列に格納
             if (centerNode.name !== soundData[b].name) {
@@ -53,8 +53,37 @@ function similar_context(centerNode) {
 // オノマトペが類似した効果音を探す
 function similar_onomatopoeia(centerNode) {
     var similarOnomatopoeia = [];
-    for (var c = 0; c < soundData.length - 1; c++) {
-        if (centerNode.form_1 === soundData[c].form_1 & centerNode.form_2 === soundData[c].form_2) {
+
+    //  レーベンシュタイン編集距離     
+    for (var c = 0; c < soundData.length; c++) {
+        var matrix = new Array(centerNode.form.length + 1);
+
+        for (var i = 0; i < centerNode.form.length + 1; i++) {
+            matrix[i] = new Array(soundData[c].form.length + 1);
+        }
+
+        for (var i = 0; i < centerNode.form.length + 1; i++) {
+            matrix[i][0] = i;
+        }
+
+        for (var j = 0; j < soundData[c].form.length + 1; j++) {
+            matrix[0][j] = j;
+        }
+
+        for (var i = 1; i < centerNode.form.length + 1; i++) {
+
+            for (var j = 1; j < soundData[c].form.length + 1; j++) {
+                var x = centerNode.form[i - 1] == soundData[c].form[j - 1] ? 0 : 1;
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j] + 1,
+                    matrix[i][j - 1] + 1,
+                    matrix[i - 1][j - 1] + x
+                );
+            }
+
+        }
+
+        if (matrix[centerNode.form.length][soundData[c].form.length] <= 2) {
             if (centerNode.name !== soundData[c].name) {
                 soundData[c].type = "onomatopoeia";
                 similarOnomatopoeia.push(soundData[c]);
@@ -63,6 +92,7 @@ function similar_onomatopoeia(centerNode) {
     }
     return similarOnomatopoeia;
 }
+
 
 // 何と何を繋げるのかのリストとノード情報を作成
 function create_linkList(centerNode, similarSoundData, similarContextData, similarOnomatopoeiaData) {
@@ -288,9 +318,9 @@ $(function() {
     var linkList = {};
 
     // JSONデータの格納
-    $.getJSON('data_test.json', function(data) {
+    $.getJSON('data_form.json', function(data) {
         // $.getJSON('data.json', function(data) {
-        for (var i = 0; i < data.length - 1; i++) {
+        for (var i = 0; i < data.length; i++) {
             soundData.push(data[i]);
             // サジェスト用配列の作成
             onomatopoeia_suggest.push(data[i].onomatopoeia);
