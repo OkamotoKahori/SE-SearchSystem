@@ -18,15 +18,56 @@ function similar_sound(centerNode) {
 // 文脈が類似した効果音を探す
 function similar_context(centerNode) {
     var similarContext = [];
+
     for (var b = 0; b < soundData.length; b++) {
-        if (centerNode.category === soundData[b].category) {
-            // 中心のノードと同じ効果音以外を配列に格納
-            if (centerNode.name !== soundData[b].name) {
-                soundData[b].type = "context";
-                similarContext.push(soundData[b]);
+        for (var i = 0; i < 2; i++) {
+            if (centerNode.context[0] === soundData[b].context[i]) {
+                // 中心のノードと同じ効果音以外を配列に格納
+                if (centerNode.name !== soundData[b].name) {
+                    soundData[b].type = "context";
+                    similarContext.push(soundData[b]);
+                }
             }
         }
     }
+
+
+    if (centerNode.context[1] !== "") {
+        for (var b = 0; b < soundData.length; b++) {
+            for (var i = 0; i < 2; i++) {
+                if (centerNode.context[1] === soundData[b].context[i]) {
+                    // 中心のノードと同じ効果音以外を配列に格納
+                    if (centerNode.name !== soundData[b].name) {
+                        soundData[b].type = "context";
+                        similarContext.push(soundData[b]);
+                    }
+                }
+            }
+        }
+    }
+
+    console.log(similarContext);
+
+    for (var b = 0; b < soundData.length; b++) {
+        for (var i = 0; i < 20; i++) {
+            if (centerNode.tag[i] !== "") {
+                if (centerNode.tag[i] === soundData[b].context[0] || centerNode.tag[i] === soundData[b].context[1]) {
+                    // 中心のノードと同じ効果音以外を配列に格納
+                    if (centerNode.name !== soundData[b].name) {
+                        soundData[b].type = "context";
+                        similarContext.push(soundData[b]);
+                    }
+                }
+            }
+        }
+    }
+
+    console.log(similarContext);
+    // 重複の削除
+    similarContext = similarContext.filter(function(x, i, self) {
+        return self.indexOf(x) === i;
+    });
+    console.log(similarContext);
     return similarContext;
 }
 
@@ -134,6 +175,11 @@ function create_linkList(centerNode, similarSoundData, similarContextData, simil
         links: link
     };
 
+    // 重複の削除
+    // linkList = linkList.filter(function(x, i, self) {
+    //     return self.indexOf(x) === i;
+    // });
+    console.log(linkList);
     return linkList;
 }
 
@@ -212,7 +258,7 @@ function visualize_output(linkList) {
         .attr("x", -20)
         .attr("dy", ".35em")
         .text(function(d) {
-            var text = (d.onomatopoeia + " " + d.context_1 + " " + d.context_2);
+            var text = (d.onomatopoeia + " " + d.context[0] + " " + d.context[1]);
             return text;
         })
         .attr("font-size", 12 + "px")
@@ -318,14 +364,14 @@ $(function() {
     var linkList = {};
 
     // JSONデータの格納
-    $.getJSON('data_form.json', function(data) {
+    $.getJSON('data_tag.json', function(data) {
         // $.getJSON('data.json', function(data) {
         for (var i = 0; i < data.length; i++) {
             soundData.push(data[i]);
             // サジェスト用配列の作成
             onomatopoeia_suggest.push(data[i].onomatopoeia);
-            context_suggest.push(data[i].context_1);
-            context_suggest.push(data[i].context_2);
+            context_suggest.push(data[i].context[0]);
+            context_suggest.push(data[i].context[1]);
         }
 
         // サジェスト用配列内の重複を削除
@@ -389,7 +435,7 @@ $(function() {
             // もし、テキストボックスに1文字以上入っていればの処理
             else if (query_context.length >= 1) {
                 for (var j = 0; j < soundData.length - 1; j++) {
-                    if (query_context === soundData[j].context_1 || query_context === soundData[j].context_2) {
+                    if (query_context === soundData[j].context[0] || query_context === soundData[j].context[1]) {
                         centerNode = soundData[j];
                         centerNode.type = "center";
                         break;
