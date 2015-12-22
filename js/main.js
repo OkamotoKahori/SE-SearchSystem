@@ -1,4 +1,26 @@
 var soundData = [];
+var userID; // IDの格納
+
+// ファイルの書き込み
+function write_result(Log, Time) {
+
+    $.ajax({
+        url: 'write.php',
+        type: 'POST',
+        async: true,
+        data: {
+            'ID': userID,
+            'chosenNode': Log,
+            'time': Time
+        }
+
+    }).success(function(data) {
+        console.log(data);
+    }).error(function() {
+        console.log('error');
+    });
+
+}
 
 // 音響特徴が類似した効果音を探す
 function similar_sound(centerNode) {
@@ -70,8 +92,6 @@ function similar_context(centerNode) {
     console.log(similarContext);
     return similarContext;
 }
-
-// var context_2 = centerNode.context_2;
 
 // $.ajax({
 //     url: 'relatedword.php',
@@ -298,6 +318,18 @@ function visualize_output(linkList) {
 
     // ノードをクリックしたときの処理
     function click(centerNode) {
+        var DD = new Date();
+        var Hours = DD.getHours(); // 時
+        var Minutes = DD.getMinutes(); // 分
+        var Seconds = DD.getSeconds(); // 秒
+        var MilliSeconds = DD.getMilliseconds(); // ミリ秒
+        var Time = (Hours + ":" + Minutes + ":" + Seconds + "." + MilliSeconds);
+
+        Log = (centerNode.name + " // " + centerNode.onomatopoeia + " // " + centerNode.type);
+
+        // ファイルに書き出す
+        write_result(Log, Time);
+
         // 可視化部分の初期化
         svg.remove();
         $('#sound').empty();
@@ -363,6 +395,15 @@ $(function() {
 
     var linkList = {};
 
+    var DD = new Date();
+    var Month = DD.getMonth() + 1; // 月
+    var Day = DD.getDate(); // 日
+    var Hours = DD.getHours(); // 時
+    var Minutes = DD.getMinutes(); // 分
+    var Now = (Month + "_" + Day + "_" + Hours + "_" + Minutes); // アンダーバー区切りでつなげた
+    var inputID = document.getElementById("ID");
+    inputID.value = Now;
+
     // JSONデータの格納
     $.getJSON('data_tag.json', function(data) {
         // $.getJSON('data.json', function(data) {
@@ -404,6 +445,8 @@ $(function() {
 
         // 検索ボタンがクリックされたときの処理
         $('#search').on('click', function() {
+            userID = $('input[name ="ID"]').val();
+
             var query_onomatopoeia = [],
                 query_context = [];
 
@@ -452,6 +495,16 @@ $(function() {
             //      if (query_onomatopoeia === soundData[k].context_1)
             //  }
             // }
+            var DD = new Date();
+            var Hours = DD.getHours(); // 時
+            var Minutes = DD.getMinutes(); // 分
+            var Seconds = DD.getSeconds(); // 秒
+            var MilliSeconds = DD.getMilliseconds(); // ミリ秒
+            var Time = (Hours + ":" + Minutes + ":" + Seconds + "." + MilliSeconds);
+
+            Log = (centerNode.name + " // " + centerNode.onomatopoeia + " // " + centerNode.type);
+
+            write_result(Log, Time);
 
             similarSoundData = similar_sound(centerNode);
             similarContextData = similar_context(centerNode);
