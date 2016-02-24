@@ -226,8 +226,8 @@ function visualize_output(linkList) {
         .linkDistance(function(d) {
             return Math.floor(Math.random() * 2 + 1) * 150;
         })
-        .friction(0.3)
-        .gravity(0.05)
+        .friction(0.5)	//値が大きいほどノード同士が離れる
+        .gravity(0.2)	//値が大きいほどノードが中心に寄る
         .size([width, height])
         .on("tick", tick)
         .start();
@@ -270,7 +270,7 @@ function visualize_output(linkList) {
         })
         .style("opacity", function(d) {
             if (d.type !== "center") {
-                return 0.5
+                return 0.5;
             }
         });
 
