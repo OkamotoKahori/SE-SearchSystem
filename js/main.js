@@ -450,6 +450,8 @@ $(function() {
             var query_onomatopoeia = [],
                 query_context = [];
 
+            var message_num = 0;
+
             //クエリの取得
             query_onomatopoeia = $('#query_onomatopoeia').val();
             query_context = $('#query_context').val();
@@ -459,42 +461,86 @@ $(function() {
 
             // クエリに一致した効果音を探す：オノマトペ
             // もし、テキストボックスに1文字以上入っていればの処理
-            if (query_onomatopoeia.length >= 1) {
+            if (query_onomatopoeia.length >= 1 && query_context.length === 0) {
                 for (var i = 0; i < soundData.length - 1; i++) {
                     // オノマトペの一致
                     if (query_onomatopoeia === soundData[i].onomatopoeia) {
                         centerNode = soundData[i];
                         centerNode.type = "center";
                         break; //ひとつ設定されたら処理を抜ける
+                    } else if (centerNode === undefined) {
+                        message_num = 1;
                     }
-                    // else if (centerNode === undefined) {
-                    //     $('#result').text('一致する効果音がありませんでした');
-                    //     return;
-                    // }
                 }
             }
 
             // クエリに一致した効果音を探す：文脈
             // もし、テキストボックスに1文字以上入っていればの処理
-            else if (query_context.length >= 1) {
-                for (var j = 0; j < soundData.length - 1; j++) {
-                    if (query_context === soundData[j].context[0] || query_context === soundData[j].context[1]) {
-                        centerNode = soundData[j];
+            else if (query_context.length >= 1 && query_onomatopoeia.length === 0) {
+                for (var i = 0; i < soundData.length - 1; i++) {
+                    if (query_context === soundData[i].context[0] || query_context === soundData[i].context[1]) {
+                        centerNode = soundData[i];
                         centerNode.type = "center";
                         break;
+                    } else if (centerNode === undefined) {
+                        message_num = 1;
                     }
                 }
             }
-            // else if (query_onomatopoeia.length == 0 & query_context.length == 0) {
-            //     console.log('入力なし');
-            //     return;
-            // }
+            // 両方のボックスに入力があった場合
+            else if (query_onomatopoeia.length >= 1 && query_context.length >= 1) {
+                for (var i = 0; i < soundData.length - 1; i++) {
+                    // 両方のクエリが一致した場合
+                    if (query_onomatopoeia === soundData[i].onomatopoeia && query_context === soundData[i].context[0] || query_onomatopoeia === soundData[i].onomatopoeia && query_context === soundData[i].context[1]) {
+                        centerNode = soundData[i];
+                        centerNode.type = "center";
+                        break; //ひとつ設定されたら処理を抜ける
+                        // それ以外の場合
+                    } else {
+                        for (var j = 0; j < soundData.length - 1; j++) {
+                            // オノマトペが一致した効果音を提示する
+                            if (query_onomatopoeia === soundData[j].onomatopoeia) {
+                                centerNode = soundData[j];
+                                centerNode.type = "center";
+                                message_num = 3;
+                                // 文脈が一致した効果音を提示する
+                            } else if (query_context === soundData[j].context[0] || query_context === soundData[j].context[1]) {
+                                centerNode = soundData[j];
+                                centerNode.type = "center";
+                                message_num = 4;
+                                // 一致するものが無かった場合
+                            } else if (centerNode === undefined) {
+                                message_num = 1;
+                            }
+                        }
+                    }
+                }
+            }
+            //ボックスに入力がない場合
+            else {
+                message_num = 2;
+            }
 
-            // else if (query_onomatopoeia.length >= 1 & query_context.length >=1){
-            //  for (var k = 0; k < soundData.length - 1; k++){
-            //      if (query_onomatopoeia === soundData[k].context_1)
-            //  }
-            // }
+            // アラートの表示部
+            switch (message_num) {
+                case 1:
+                    alert('一致する効果音がありませんでした。');
+                    message_num = 0;
+                    break;
+                case 2:
+                    alert('クエリを入力してください。');
+                    message_num = 0;
+                    break;
+                case 3:
+                    alert('条件に完全一致する効果音がなかったため、オノマトペが一致する効果音を提示します。');
+                    message_num = 0;
+                    break;
+                case 4:
+                    alert('条件に完全一致する効果音がなかったため、音の発生源が一致する効果音を提示します。');
+                    message_num = 0;
+                    break;
+            }
+
             var DD = new Date();
             var Hours = DD.getHours(); // 時
             var Minutes = DD.getMinutes(); // 分
