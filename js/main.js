@@ -368,13 +368,17 @@ $(function() {
 
     // キー操作
     $('html').keyup(function(e) {
-        if (selectData !== false) {
-            switch (e.which) {
-                case 70: //f：お気に入り
-                    favList_output(selectData);
-            }
-        }
+        switch (e.which) {
 
+            case 70: //f：お気に入り
+                if (selectData !== false) {
+                    favList_output(selectData);
+                }
+
+            case 82: //r：お気に入りの削除
+                var pID = '#' + favID;
+                $(pID).remove();
+        }
     });
 
     // お気に入り部分
@@ -411,7 +415,7 @@ $(function() {
         if (duplicateID.length > 0) {
             var remove_duplicateID = '#' + duplicateID;
             $(remove_duplicateID).remove();
-        } 
+        }
 
         // お気に入りに追加された要素をドラッグ移動可能にする
         $('.favorite').draggable();
@@ -429,14 +433,6 @@ $(function() {
                 $('#sound').empty();
 
             });
-
-        $('html').keyup(function(e) {
-            switch (e.which) {
-                case 82: //r：お気に入りの削除
-                    var pID = '#' + favID;
-                    $(pID).remove();
-            }
-        });
     }
 
 
