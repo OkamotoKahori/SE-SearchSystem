@@ -3,11 +3,14 @@
 
 <head>
     <meta charset="utf-8">
-    <title>効果音検索システム</title>
+    <title>効果音検索システム：SERVA</title>
+    <!-- jQuery -->
     <script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="lib/jquery.parse.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+    <!-- d3.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+    <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="main.css">
     <link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.min.css" />
 </head>
@@ -17,13 +20,13 @@
         <input id="query_onomatopoeia" type="search" placeholder="オノマトペ" size="20" maxlength="40" />
         <input id="query_context" type="search" placeholder="音の発生源" size="20" maxlength="40" />
         <input id="ID" type="hidden" name="ID" placeholder="ログ回収用">
-        <input id="search" type="button" value="検索">
+        <input id="search" type="button" name="search" value="Search">
     </form>
+
     <div id="sound"></div>
-    <div id="space">
-        <div class="result" id="result"></div>
-        <div class="favList" id="favList"></div>
-    </div>
+    <div id="download_source"></div>
+    <div id="result"></div>
+    <div id="favList"></div>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
 

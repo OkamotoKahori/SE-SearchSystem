@@ -4,21 +4,50 @@ body {
     width: 100%;
 }
 
-#space {
+#result {
+    width: 80%;
     height: 100%;
-    width: 100%;
 }
 
-#result {
-    width: 100%;
-    height: 100%;
-}
-/*
 #favList {
-    width: 100%;
-    height: 20%;
-    border-style: dotted;
-    border-width: 3px;
-    border-color: #FF0077;
+    position: absolute;
+    top: 5%;
+    right: 0%;
+    width: 18%;
+    height: 100%;
+    /*border-style: dotted;*/
+    /*border-width: 3px;*/
+    border: 2px dashed #FF0077;
+    border-radius: .4em 2em .5em 3em/3em .5em 2em .5em;
+    /*border-color: #FF0077;*/
 }
-*/
+
+p {
+    font-size: 10pt;
+}
+
+#search {
+    display: inline-block;
+    padding: .10em 2em;
+    border: 2px dashed #FF0077;
+    border-radius: .4em 2em .5em 3em/3em .5em 2em .5em;
+    color: #FF0077;
+    text-decoration: none;
+    text-align: center;
+    background-color: #FFF;
+    font-size: 14px;
+}
+
+#query_onomatopoeia{
+    display: inline-block;
+    border: 2px solid #FFA500;
+    border-radius: 3em .2em 2em .5em/.4em 2em .5em 2em;
+    color: #333;
+}
+
+#query_context{
+    display: inline-block;
+    border: 2px solid #FFA500;
+    border-radius: 3em .5em 2em .5em/.4em 2em .5em 2em;
+    color: #333;
+}
