@@ -7,23 +7,35 @@ var similarSoundData = [],
 var linkList;
 
 // お気に入り機能関連
-var selected_node_text;
-var selected_SE;
-var selected_type;
-var favList = [];
+var favArray = [];
 var selectData = false;
-var favID;
+var playingFavIndex;
 
-// var count = 0;
+// 履歴機能
+var historyArray = [];
+
+var userID; // 被験者IDの格納
+
+// ログのファイル名を決める
+var DD = new Date();
+var Month = DD.getMonth() + 1; // 月
+var Day = DD.getDate(); // 日
+var Hours = DD.getHours(); // 時
+var Minutes = DD.getMinutes(); // 分
+var Seconds = DD.getSeconds(); // 秒
+var Now = ( "SERVA_" + Month + "_" + Day + "_" + Hours + "_" + Minutes + "_" + Seconds); // アンダーバー区切りでつなげた
+var inputID = document.getElementById("ID");
+inputID.value = Now;
 
 
 $(function() {
+
     // JSONデータの格納
     var onomatopoeia_suggest = [],
         context_suggest = [];
 
     // JSONデータの格納
-    $.getJSON('data_tag.json', function(data) {
+    $.getJSON('data_test.json', function(data) {
         for (var i = 0; i < data.length; i++) {
             soundData.push(data[i]);
             // サジェスト用配列の作成
@@ -63,6 +75,38 @@ $(function() {
 
     });
 
+    function create_timeData() {
+        var DD = new Date();
+        var Hours = DD.getHours(); // 時
+        var Minutes = DD.getMinutes(); // 分
+        var Seconds = DD.getSeconds(); // 秒
+        var MilliSeconds = DD.getMilliseconds(); // ミリ秒
+        var Time = (Hours + ":" + Minutes + ":" + Seconds + "." + MilliSeconds);
+
+        return Time;
+
+    }
+
+    // ファイルの書き込み
+    function write_result(Log, Time) {
+
+        $.ajax({
+            url: 'write.php',
+            type: 'POST',
+            async: true,
+            data: {
+                'ID': userID,
+                'log': Log,
+                'time': Time
+            }
+
+        }).success(function(data) {
+            // console.log(data);
+        }).error(function() {
+            console.log('error');
+        });
+
+    }
 
     // 音響特徴が類似した効果音を探す
     function similar_sound(centerNode) {
@@ -76,6 +120,7 @@ $(function() {
                 }
             }
         }
+
         return similarSounds;
     }
 
@@ -165,7 +210,7 @@ $(function() {
 
             }
 
-            if (matrix[centerNode.form.length][soundData[c].form.length] <= 2) {
+            if (matrix[centerNode.form.length][soundData[c].form.length] <= 1) {
                 if (centerNode.name !== soundData[c].name) {
                     soundData[c].type = "onomatopoeia";
                     similarOnomatopoeia.push(soundData[c]);
@@ -178,10 +223,12 @@ $(function() {
 
     // 何と何を繋げるのかのリストとノード情報を作成
     function create_linkList(centerNode, similarSoundData, similarContextData, similarOnomatopoeiaData) {
+
         var node = [],
             link = [];
 
         node.push(centerNode); //中心のノードの情報を追加
+        create_historyList(centerNode);
 
         // 音響特徴が類似した効果音のリストを追加
         for (var l = 0; l < similarSoundData.length; l++) {
@@ -220,14 +267,14 @@ $(function() {
         // linkList = linkList.filter(function(x, i, self) {
         //     return self.indexOf(x) === i;
         // });
-        console.log(linkList);
+
         return linkList;
     }
 
-
-
     // 可視化部分
     function visualize_output(linkList) {
+
+        $('#result').empty();
 
         // svg領域の準備
         var width = $("#result").innerWidth(),
@@ -244,7 +291,7 @@ $(function() {
             .linkDistance(function(d) {
                 return Math.floor(Math.random() * 2 + 1) * 150;
             })
-            .friction(0.5) //値が大きいほどノード同士が離れる
+            .friction(0.65) //値が大きいほどノード同士が離れる
             .gravity(0.2) //値が大きいほどノードが中心に寄る
             .size([width, height])
             .on("tick", tick)
@@ -326,14 +373,25 @@ $(function() {
         // ノードにマウスを乗せたときの処理：音を再生
         function mouseover(d) {
 
+            // ノードをホバーしたときの時刻を取得
+            Time = create_timeData();
+            Log = ("Play" + '\t' + d.name + '\t' + d.onomatopoeia + '\t' + d.context[0] + '\t' + d.context[1] + '\t' + d.type);
+            // ファイルに書き出す
+            // write_result(Log, Time);
+
             selectData = d;
 
             $('#sound').append('<audio autoplay><source src="./sound/' + d.name + '.wav" type="audio/wav"></audio>');
-            $('#download_source').append('<a href="./sound/' + d.name + '.wav" download="' + d.name + '.wav"></a>');
+            // $('#download_source').append('<a href="./sound/' + d.name + '.wav" download="' + d.name + '.wav"></a>');
         }
 
         // ノードからマウスをアウトしたときの処理：音を停止
         function mouseout() {
+            Time = create_timeData();
+            Log = ("Stop" + '\t' + '\t' + '\t' + '\t' + '\t' + '\n');
+            // ファイルに書き出す
+            // write_result(Log, Time);
+
 
             selectData = false;
 
@@ -344,6 +402,14 @@ $(function() {
         // ノードをクリックしたときの処理
         function click(centerNode) {
 
+            // ノードをクリックしたときの時刻を取得
+            Time = create_timeData();
+
+            Log = ("click" + '\t' + '\t' + '\t' + '\t' + '\t');
+
+            // ファイルに書き出す
+            // write_result(Log, Time);
+
             // 可視化部分の初期化
             svg.remove();
             $('#sound').empty();
@@ -352,19 +418,10 @@ $(function() {
             // centerNodeにtype:centerを追加
             centerNode.type = "center";
 
-            // centerNodeに類似した効果音情報の取得
-            similarSoundData = similar_sound(centerNode);
-            similarContextData = similar_context(centerNode);
-            similarOnomatopoeiaData = similar_onomatopoeia(centerNode);
-
-            // リストの更新
-            linkList = create_linkList(centerNode, similarSoundData, similarContextData, similarOnomatopoeiaData);
-
-            // 可視化部分の更新
-            visualize_output(linkList);
+            searchSimilarSound(centerNode);
         }
-    };
 
+    };
 
     // キー操作
     $('html').keyup(function(e) {
@@ -374,15 +431,54 @@ $(function() {
                 if (selectData !== false) {
                     favList_output(selectData);
                 }
+                break;
 
             case 82: //r：お気に入りの削除
-                var pID = '#' + favID;
-                $(pID).remove();
+            // 配列とliの削除
+                var removeFav = $('#favList li').eq(playingFavIndex);
+                removeFav.remove();
+                favArray.splice(playingFavIndex,1);
+                break;
         }
     });
 
+    // 履歴機能
+    function create_historyList(centerNode){
+
+        historyArray.push(centerNode);
+        $('#historyList').append('<li class="addedHistory"><font color="#FF82AB">' + centerNode.onomatopoeia + " " + centerNode.context[0] + " " + centerNode.context[1] + '</font></li>');
+
+    }
+
+    $('#historyList').on('click', 'li', function(){
+        var index = $(this).index();
+
+        // ノードをクリックしたときの時刻を取得
+        Time = create_timeData();
+
+    // Logちゃんとかく
+        Log = ("history" + '\t' + '\t' + '\t' + '\t' + '\t');
+
+        // ファイルに書き出す
+        // write_result(Log, Time);
+
+        centerNode = historyArray[index];
+        centerNode.type = "center";
+
+        searchSimilarSound(centerNode);
+
+    });
+
+
     // お気に入り部分
     function favList_output(selectData) {
+
+        var favFlag = false;
+
+        Time = create_timeData();
+        Log = ("favorite_add" + '\t' + selectData.name + '\t' + selectData.onomatopoeia + '\t' + selectData.context[0] + '\t' + selectData.context[1] + '\t' + selectData.type);
+        // ファイルに書き出す
+        // write_result(Log, Time);
 
         var text_color;
 
@@ -396,56 +492,57 @@ $(function() {
             text_color = "#7B68EE";
         }
 
-        $('#favList').append('<p class="favorite" id ="' + selectData.name + '"><font color="' + text_color + '">' + selectData.onomatopoeia + " " + selectData.context[0] + " " + selectData.context[1] + '</font></p>');
-
-        // お気に入りへの重複追加をしない
-        var ID_check = [],
-            duplicateID = [];
-
-        [].forEach.call(document.querySelectorAll('[id]'), function(elm) {
-            var id = elm.getAttribute('id');
-            if (ID_check.indexOf(id) !== -1) {
-                duplicateID.push(id);
-            } else {
-                ID_check.push(id);
+        if (favArray.length == 0){
+            favFlag = true;
+        } else {
+            for (var i = 0; i < favArray.length; i++){
+                if (selectData.name === favArray[i].name){
+                    favFlag = false;
+                    break;
+                } else {
+                    favFlag = true;
+                }
             }
-        });
+        }
 
-        // 既に追加したいIDが存在していたら削除
-        if (duplicateID.length > 0) {
-            var remove_duplicateID = '#' + duplicateID;
-            $(remove_duplicateID).remove();
+        if (favFlag == true){
+            favArray.push(selectData);
+            $('#favList').append('<li class="addedFavorite"><font color="' + text_color + '">' + selectData.onomatopoeia + " " + selectData.context[0] + " " + selectData.context[1] + '</font></li>');
         }
 
         // お気に入りに追加された要素をドラッグ移動可能にする
-        $('.favorite').draggable();
+        $('.addedFavorite').draggable();
 
         // マウスオーバー時に再生
-        $('.favorite').filter(":last").hover(function() {
-
-                favID = (this.id);
-                $('#sound').append('<audio autoplay><source src="./sound/' + selectData.name + '.wav" type="audio/wav"></audio>');
-
+        $('.addedFavorite').filter(":last").hover(function() {
+            playingFavIndex = $(this).index();
+            $('#sound').append('<audio autoplay><source src="./sound/' + favArray[playingFavIndex].name + '.wav" type="audio/wav"></audio>');            
             },
             // マウスアウト時に停止
             function() {
-
                 $('#sound').empty();
-
             });
     }
+
+    // Endボタンが押下されたときの処理
+    $('#end').on('click', function() {
+        Time = create_timeData();
+        Log = ("End" + '\t' +  '\t' + '\t' + '\t' + '\t');
+        // ファイルに書き出す
+        // write_result(Log, Time);
+
+    })
 
 
     // 検索ボタンがクリックされたときの処理
     $('#search').on('click', function() {
 
+        userID = $('input[name ="ID"]').val();
+
         var query_onomatopoeia = [],
             query_context = [];
 
         var message_num = 0;
-
-        // count += 1;
-        // console.log(count);
 
         //クエリの取得
         query_onomatopoeia = $('#query_onomatopoeia').val();
@@ -457,8 +554,16 @@ $(function() {
             for (var i = 0; i < soundData.length - 1; i++) {
                 // オノマトペの一致
                 if (query_onomatopoeia === soundData[i].onomatopoeia) {
+
+                    // クエリを取得した時間を取得する
+                    Time = create_timeData();
+
                     centerNode = soundData[i];
                     centerNode.type = "center";
+
+                    Log = ("query_onomatopoeia" + '\t' + centerNode.name + '\t' + centerNode.onomatopoeia + '\t' + centerNode.context[0] + '\t' + centerNode.context[1] + '\t' + centerNode.type);
+
+
                     break; //ひとつ設定されたら処理を抜ける
                 }
             }
@@ -469,8 +574,15 @@ $(function() {
         else if (query_context.length >= 1 && query_onomatopoeia.length === 0) {
             for (var i = 0; i < soundData.length - 1; i++) {
                 if (query_context === soundData[i].context[0] || query_context === soundData[i].context[1]) {
+
+                    Time = create_timeData();
+
+
                     centerNode = soundData[i];
                     centerNode.type = "center";
+
+                    Log = ("query_context" + '\t' + centerNode.name + '\t' + centerNode.onomatopoeia + '\t' + centerNode.context[0] + '\t' + centerNode.context[1] + '\t' + centerNode.type);
+
                     break;
                 }
             }
@@ -480,21 +592,39 @@ $(function() {
             for (var i = 0; i < soundData.length - 1; i++) {
                 // 両方のクエリが一致した場合
                 if (query_onomatopoeia === soundData[i].onomatopoeia && query_context === soundData[i].context[0] || query_onomatopoeia === soundData[i].onomatopoeia && query_context === soundData[i].context[1]) {
+
+                    Time = create_timeData();
+
                     centerNode = soundData[i];
                     centerNode.type = "center";
+
+                    Log = ("query_both" + '\t' + centerNode.name + '\t' + centerNode.onomatopoeia + '\t' + centerNode.context[0] + '\t' + centerNode.context[1] + '\t' + centerNode.type);
+
                     break;
                     // それ以外の場合
                 } else {
                     for (var j = 0; j < soundData.length - 1; j++) {
                         // オノマトペが一致した効果音を提示する
                         if (query_onomatopoeia === soundData[j].onomatopoeia) {
+                            Time = create_timeData();
+
                             centerNode = soundData[j];
                             centerNode.type = "center";
+
+                            Log = ("query_only_onomatopoeia" + '\t' + centerNode.name + '\t' + centerNode.onomatopoeia + '\t' + centerNode.context[0] + '\t' + centerNode.context[1] + '\t' + centerNode.type);
+
                             message_num = 3;
+
                             // 文脈が一致した効果音を提示する
                         } else if (query_context === soundData[j].context[0] || query_context === soundData[j].context[1]) {
+
+                            Time = create_timeData();
+
                             centerNode = soundData[j];
                             centerNode.type = "center";
+
+                            Log = ("query_only_context" + '\t' + centerNode.name + '\t' + centerNode.onomatopoeia + '\t' + centerNode.context[0] + '\t' + centerNode.context[1] + '\t' + centerNode.type);
+
                             message_num = 4;
                         }
                     }
@@ -530,6 +660,15 @@ $(function() {
                 break;
         }
 
+        // ファイルに書き出す
+        // write_result(Log, Time);
+
+        searchSimilarSound(centerNode);
+
+    });
+
+    function searchSimilarSound(centerNode){
+
         //音響特徴が類似した効果音集合をつくる 
         similarSoundData = similar_sound(centerNode);
         //文脈が類似した効果音集合をつくる
@@ -543,19 +682,7 @@ $(function() {
         // 可視化する
         visualize_output(linkList);
 
-    });
+    };
 
-    //突貫工事
-    // $('#query_onomatopoeia').on('click', function() {
-    //     if (count >= 1) {
-    //         window.location.reload();
-    //     }
-    // })
-
-    // $('#query_context').on('click', function() {
-    //     if (count >= 1) {
-    //         window.location.reload();
-    //     }
-    // })
 
 });
